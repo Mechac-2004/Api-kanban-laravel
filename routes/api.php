@@ -4,6 +4,7 @@ use App\Http\Controllers\ColumnController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::middleware('auth:sanctum')->group(function () {
     // Routes pour les colonnes
     Route::get('/columns', [ColumnController::class, 'index']);
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::middleware(['cors'])->get('/some-api', function () {
     return response()->json(['message' => 'This route uses the CORS middleware']);
 });
+Route::apiResource('columns', ColumnController::class);
+Route::apiResource('tasks', TaskController::class);
