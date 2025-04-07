@@ -6,14 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+   /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('columns', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('description')->nullable();
+            $table->enum('status', ['A Faire', 'en cours', 'Terminer'])->default('todo');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('column_id')->constrained()->onDelete('cascade');
             $table->integer('position');
             $table->timestamps();
         });
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('columns');
+        Schema::dropIfExists('tasks');
     }
 };
