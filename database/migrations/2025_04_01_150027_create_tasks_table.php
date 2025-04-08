@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
+            $table->id('task_id');
             $table->string('title');
             $table->text('description')->nullable();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('column_id')->constrained()->onDelete('cascade');
-            $table->integer('position');
+            $table->string('status');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('column_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('column_id')->references('column_id')->on('columns')->onDelete('cascade');
             $table->timestamps();
         });
     }
