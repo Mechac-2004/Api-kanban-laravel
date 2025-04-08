@@ -34,7 +34,6 @@ class TasksController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'status' => 'required|string',
-            'user_id' => 'required|exists:users,id',
             'column_id' => 'required|exists:columns,column_id',
         ]);
 
